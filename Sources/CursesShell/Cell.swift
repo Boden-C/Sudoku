@@ -1,4 +1,4 @@
-
+    
 import Foundation
 import Curses
 let customNum = CustomDigitFont()
@@ -49,10 +49,9 @@ class Cell:CustomStringConvertible {
     }
 
     func writeCustom(mainWindow:Window, middle:Point) {
-        mainWindow.cursor.position = Point(x:middle.x - 1, y:middle.y - 1)
-        for line in customNum.array((self.digit ?? 0)) {
+        for (index, line) in customNum.array((self.digit ?? 0)).enumerated() {
+            mainWindow.cursor.position = Point(x:middle.x - 1, y:(middle.y - 1) + index)
             mainWindow.write("\(line)")
-            mainWindow.cursor.position = Point(x:mainWindow.cursor.position.x - line.count, y:mainWindow.cursor.position.y + 1)
         }
     }
 }

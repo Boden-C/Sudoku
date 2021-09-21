@@ -1,4 +1,5 @@
-
+ 
+//Copyright Boden Font 2021
 class CustomDigitFont {
     let array:[[String]]
 
