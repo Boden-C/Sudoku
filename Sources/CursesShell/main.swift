@@ -1,4 +1,4 @@
- 
+  
 import Foundation
 import Curses
 
@@ -62,6 +62,7 @@ func msg(_ msg:String) {
     mainWindow.cursor.popPosition()
 }
 
+
 var msgCount = 0
 let beginMsg = "Sudoku Board "
 mainWindow.write(beginMsg)
@@ -80,7 +81,7 @@ func checkWindowSize(size:Int) -> Bool {
         return false
     }
 }
-
+//Display the guide 
 var showGuide = false
 func turnOnGuide() {
     msg("Displaying Help Guide 1/1, press h to exit")
