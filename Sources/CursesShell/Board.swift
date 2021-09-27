@@ -1,4 +1,4 @@
-
+ 
 import Foundation
 import Curses
 
@@ -24,15 +24,14 @@ class Board {
     func render(mainWindow:Window) {
         let cellHeight = cellSize + 1
         let cellWidth = Int(Double(cellHeight + 1) * 1.9) - 1
-        var beginPoint = Point(x:(mainWindow.size.width-(cellWidth * 10))/2,
-                               y:(mainWindow.size.height-(cellHeight * 9))/2)
+        var beginPoint = Point(x:(mainWindow.size.width-(cellWidth * 10))/2,y:(mainWindow.size.height-(cellHeight * 9))/2)
         mainWindow.cursor.position = beginPoint
 
         func drawCell(_ topLeft:Point) {
             let cell = Rect(topLeft:topLeft, size:Size(width:cellWidth+1,height:cellHeight+1))
             mainWindow.draw(cell)
         }
-
+// drawing the edge Line
         func edgeLine(x:Int, y:Int, edge:String) {
             mainWindow.cursor.position = Point(x:x, y:y)
             for _ in 1...3 {
@@ -45,6 +44,7 @@ class Board {
             }
         }
 
+        // drawing the middle line of the box/cell
         func middleLine(x:Int, y:Int) {
             mainWindow.cursor.position = Point(x:x, y:y)
             for _ in 1...3 {
@@ -86,7 +86,7 @@ class Board {
                 currentY += squareHeightGap
             }
         }
-
+        // Defining the edges on where to start drawing 
         for _ in 1...3 {
             edgeLine(x:beginPoint.x, y:beginPoint.y, edge:"┳")
             middleLine(x:beginPoint.x, y:beginPoint.y + cellHeight)
@@ -94,12 +94,13 @@ class Board {
             edgeLine(x:beginPoint.x, y: beginPoint.y + (3 * cellHeight), edge:"┻")
             beginPoint = Point(x:beginPoint.x, y: (beginPoint.y + (3 * cellHeight) + squareHeightGap))
         }
-
+// highlighting the box
         mainWindow.turnOn(redOnBlack)
         drawCell(highlightPoint)
         mainWindow.turnOff(redOnBlack)
     }
 
+    // resizing the board till it fits the screen
     func resize(_ sizeDifference:Int) {
         guard (self.cellSize + sizeDifference) >= 1 else { self.cellSize = 1; return}
         self.cellSize = self.cellSize + sizeDifference
