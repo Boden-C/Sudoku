@@ -31,7 +31,7 @@ let mainWindow = screen.window
 let cursor = mainWindow.cursor
 mainWindow.cursor.position = Point(x:0, y:0)
 let keyboard = Keyboard.shared
-//Stat up Colors
+//Start up Colors
 let colors = Colors.shared
 precondition(colors.areSupported, "This terminal doesn't support colors")
 colors.startUp()
@@ -74,8 +74,8 @@ mainWindow.turnOff(Attribute.dim)
 msg("Note: Upgrade to the premium package to get colors")
 
 func checkWindowSize(size:Int) -> Bool {
-    let fullBoardSize = size*gridSize
-    if ((fullBoardSize+(board.squareHeightGap*4) <= mainWindow.size.height) && (fullBoardSize+(board.squareLengthGap*4) <= mainWindow.size.width)) {
+    let fullSize = size*gridSize
+    if ((fullSize+(board.squareHeightGap*4) <= mainWindow.size.height) && (fullSize+(board.squareLengthGap*4) <= mainWindow.size.width)) {
         return true
     } else {
         return false
@@ -96,6 +96,8 @@ func turnOffGuide() {
     msg("Exited Help Guide")
 }
 
+//Checking the board size and shrinking it till it fits then it will print
+
 while board.cellSize > 1 {
     if checkWindowSize(size:board.cellSize+1) {
         board.render(mainWindow:mainWindow)
@@ -113,7 +115,7 @@ if checkWindowSize(size:board.cellSize+1) == false {
 //Loop until key press
 let errorMsg = " is an invalid key sequence, press h for help"
 while true {
-
+// assinging an Int value to the array in the board in each cell
     let key = keyboard.getKey(window:mainWindow)
     if key.keyType == .isCharacter {
         switch (key.character!) {
@@ -156,6 +158,7 @@ while true {
     } else if key.keyType == .isControl {
         msg("ctrl-\(key.control!)" + errorMsg)
     } else {
+        // Resizing the board using different keys 
         switch (key.keyType) {
         case .arrowDown:
             guard board.cursorRow + 1 <= 8 else {
