@@ -24,7 +24,7 @@ class Cell:CustomStringConvertible {
         self.boxRowNum = Int((Double(row/3)).rounded(.down))
         self.boxColNum = Int((Double(col/3)).rounded(.down))
     }
-
+    
     var description: String {
         self.digit.map{ String($0) } ?? " "
     }
@@ -35,7 +35,7 @@ class Cell:CustomStringConvertible {
         guard (1...9).contains(num) else { self.digit = nil; return }
         self.digit = num
     }
-
+    
     func check() -> Bool {
         guard possibleDigits.count == 1 else { return false }
         self.isConfirmed = true
