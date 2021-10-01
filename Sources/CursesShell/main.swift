@@ -53,7 +53,7 @@ let redOnBlack = colors.newPair(foreground:red, background:black)
 
 var board = Board(grid:grid, highlightColor:redOnBlack)
 
-//Chat
+// shows text to chat box on top right
 func msg(_ msg:String) {
     mainWindow.cursor.pushPosition(newPosition:Point(x:0, y:1))
     mainWindow.clearToEndOfLine()
