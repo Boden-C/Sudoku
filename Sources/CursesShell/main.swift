@@ -14,6 +14,8 @@ class Handler : CursesHandlerProtocol {
     }
 }
 
+let guide = Guide(mainWindow)
+
 let gridSize = 9
 
 var grid = [[Cell]]()
@@ -81,20 +83,6 @@ func checkWindowSize(size:Int) -> Bool {
         return false
     }
 }
-//Display the guide 
-var showGuide = false
-func turnOnGuide() {
-    msg("Displaying Help Guide 1/1, press h to exit")
-    mainWindow.cursor.pushPosition(newPosition:Point(x:0, y:3))
-    mainWindow.write("Help Guide: \ne to exit \n+ and - to resize Sudoku Board \n↑ ↓ → ← to navigate the Sudoku Board \n1-9 to input numbers into the cell \nbackspace or 0 to remove numbers from cell \nh to open/exit the help guide \nctrl-c to forcefully close")
-    mainWindow.cursor.popPosition()
-    board.render(mainWindow:mainWindow)
-}
-func turnOffGuide() {
-    mainWindow.clear()
-    board.render(mainWindow:mainWindow)
-    msg("Exited Help Guide")
-}
 
 //Checking the board size and shrinking it till it fits then it will print
 
@@ -142,11 +130,11 @@ while true {
             board.render(mainWindow:mainWindow)
             msg("Reduced Sudoku Board to Size[\(board.cellSize)]    Tip: Zoom out with emacs instead")
         case "h":
-            showGuide = !showGuide
-            if showGuide {
-                turnOnGuide()
+            guide.showGuide = !guide.showGuide
+            if guide.showGuide {
+                guide.on(mainWindow)
             } else {
-                turnOffGuide()
+                guide.off(mainWindow)
             }
         case "e":
             screen.shutDown()
