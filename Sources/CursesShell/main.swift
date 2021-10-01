@@ -1,7 +1,7 @@
   
 import Foundation
 import Curses
-
+//need to clean up code, very messy
 // Define interrupt handler to terminate Curses with CTRL-C
 class Handler : CursesHandlerProtocol {
     func interruptHandler() {
