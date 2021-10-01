@@ -6,7 +6,7 @@ let customNum = CustomDigitFont()
 class Cell:CustomStringConvertible {
     private(set) var digit:Int?
     private(set) var possibleDigits: Set<Int>
-
+//Should add better var names so it will be more orgnazised 
     private(set) var row:Int
     private(set) var col:Int
     private(set) var boxRowNum:Int
@@ -28,6 +28,7 @@ class Cell:CustomStringConvertible {
     var description: String {
         self.digit.map{ String($0) } ?? " "
     }
+    // add spaces to clean up code
 
     func clear() { self.digit = nil }
 
@@ -47,7 +48,7 @@ class Cell:CustomStringConvertible {
         mainWindow.cursor.position = middle
         mainWindow.write("\(self)")
     }
-
+//used to write custom font
     func writeCustom(mainWindow:Window, middle:Point) {
         for (index, line) in customNum.array((self.digit ?? 0)).enumerated() {
             mainWindow.cursor.position = Point(x:middle.x - 1, y:(middle.y - 1) + index)
